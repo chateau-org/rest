@@ -6,20 +6,19 @@ import log from "../utils/logger/logger";
 
 const router = express.Router();
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
       return res.status(500).json({ error: err });
     } else {
       const user = new User({
-        _id: mongoose.Types.ObjectId,
+        _id: new mongoose.Types.ObjectId,
         email: req.body.email,
         password: hash,
       });
       user
         .save()
         .then(result => {
-          log.info(result);
           res.status(201).json({
             message: "User successfully created"
           });
