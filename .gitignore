@@ -1,0 +1,9 @@
+node_modules
+dist
+
+# yarn v2 and later
+.yarn/cache
+.yarn/install-state.gz
+
+# environment variables
+.env
