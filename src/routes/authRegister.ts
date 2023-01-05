@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
           expiresIn: "1h",
         });
         res.status(201).json({
-          message: "User sucessfully created"
+          message: "User successfully created",
         });
       })
       .catch((err) => {
