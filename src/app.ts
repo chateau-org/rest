@@ -2,7 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import log from "./utils/logger/logger";
 import mongoose from "mongoose";
-import registerRoutes from "./routes/authRegister";
+import registerRoute from "./routes/authRegister";
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 // routes
-app.use("/auth/signup", registerRoutes);
+app.use("/auth/signup", registerRoute);
 
 app.listen(port, () => log.info(`API UP! (on port ${port})`))
 
