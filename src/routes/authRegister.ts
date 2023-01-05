@@ -6,7 +6,7 @@ import validator from "validator";
 
 const router = express.Router();
 
-router.post("/signup", async (req, res) => {
+router.post("/", async (req, res) => {
   const hash = await argon2.hash(req.body.password);
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
