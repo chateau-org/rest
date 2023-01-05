@@ -2,7 +2,7 @@ import express from "express";
 import User from "../models/auth";
 import mongoose from "mongoose";
 import argon2 from "argon2";
-import log from "../utils/logger/logger";
+import validator from "validator";
 
 const router = express.Router();
 
@@ -13,19 +13,24 @@ router.post("/signup", async (req, res) => {
     email: req.body.email,
     password: hash,
   });
-  user
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "User successfully created",
+  if (validator.isEmail(user.email) === true) {
+    user
+      .save()
+      .then(() => {
+        res.status(201).json({
+          message: "User successfully created",
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
       });
-    })
-    .catch((err) => {
-      log.error(err);
-      res.status(500).json({
-        error: err,
-      });
+  } else {
+    res.status(400).json({
+      message: "Invalid email address",
     });
+  }
 });
 
 export default router;
